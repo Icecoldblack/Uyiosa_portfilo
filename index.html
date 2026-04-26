@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uyiosa Nehikhuere</title>
+  <meta name="description" content="Portfolio of Uyiosa Nehikhuere — Software Engineering Student. Projects, experience, and contact.">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+<canvas id="bg"></canvas>
+
+<div id="nav-dots">
+  <div class="dot-btn active" data-page="0" data-label="WELCOME"></div>
+  <div class="dot-btn" data-page="1" data-label="EXPERIENCE"></div>
+  <div class="dot-btn" data-page="2" data-label="CONTACT"></div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- MATRIX -->
+<div id="mat-ov"><canvas id="mat-cv"></canvas><div class="mat-msg">ACCESS GRANTED<br><span style="font-size:.4em;opacity:.7">konami code activated 🎮<br>click to close</span></div></div>
+
+<!-- TERMINAL -->
+<div id="term-ov">
+  <div class="term-win">
+    <div class="term-hd">
+      <div class="td td-r" onclick="closeTerm()"></div>
+      <div class="td td-y"></div>
+      <div class="td td-g"></div>
+      <span class="term-title">uyiosa@portfolio ~ bash</span>
+    </div>
+    <div class="term-body" id="t-body">
+      <div class="tl">Welcome to Uyiosa's terminal 👾</div>
+      <div class="tl">Type <span style="color:var(--cyan)">help</span> for commands.</div>
+      <div class="tl">&nbsp;</div>
+    </div>
+    <div class="term-in-row"><span class="t-prompt">~$</span><input id="t-inp" autocomplete="off" spellcheck="false" placeholder="type here..."></div>
+  </div>
+</div>
+
+<!-- PAGE 1: WELCOME -->
+<div class="page active" id="page-welcome" data-screen-label="01 Welcome">
+  <div class="welcome-inner">
+    <div id="scramble-text"></div>
+    <div class="hero-name-wrap" id="hero-name">
+      <h1 class="big-name">
+        <span class="line1">UYIOSA</span>
+        <span class="line2">NEHIKHUERE</span>
+      </h1>
+      <div class="big-role">Software Engineering Student</div>
+      <button class="enter-btn" id="enter-btn" onclick="goTo(1)">
+        <span>
+          Enter
+          <svg class="arrow-icon" viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M0 5h18M13 1l5 4-5 4"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="scroll-hint" id="scroll-hint">scroll or click to explore</div>
+</div>
+
+<!-- PAGE 2: EXPERIENCE -->
+<div class="page" id="page-experience" data-screen-label="02 Experience">
+  <div class="exp-wrap">
+    <div class="page-label">Work</div>
+    <h2 class="page-heading">Things I've<br><em>Built</em></h2>
+
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-idx">01 / 03</div>
+        <div class="proj-name">EasePath</div>
+        <div class="proj-desc">Job Automation Platform &amp; This helps job seekers track activity and experiment with automated job applications..</div>
+        <div class="proj-tags"><span class="tag">React</span><span class="tag">React</span><span class="tag">Java</span></div>
+        <a href="https://github.com/Icecoldblack/EasePath" target="_blank" class="proj-link">GitHub</a>
+      </div>
+      <div class="proj-card">
+        <div class="proj-idx">02 / 03</div>
+        <div class="proj-name">PantherWatch</div>
+        <div class="proj-desc">This project will notify students when a class section is available or opens up.</div>
+        <div class="proj-tags"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">GCP</span></div>
+        <a href="https://github.com/OfficialEseosa/panther-watch" target="_blank" class="proj-link">GitHub</a>
+      </div>
+      <div class="proj-card">
+        <div class="proj-idx">03 / 03</div>
+        <div class="proj-name">Medapath</div>
+        <div class="proj-desc">Medical resource navigator — find the right specialists and care pathways quickly and clearly.</div>
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">Vercel</span></div>
+        <a href="https://github.com/Icecoldblack/Medapath" target="_blank" class="proj-link">GitHub</a>
+      </div>
+    </div>
+
+    <div class="skills-row">
+      <div class="skill-pill">React</div>
+      <div class="skill-pill">Python</div>
+      <div class="skill-pill">Java</div>
+      <div class="skill-pill">TypeScript</div>
+      <div class="skill-pill">Vercel</div>
+      <div class="skill-pill">GCP</div>
+      <div class="skill-pill">Git</div>
+    </div>
+
+    <div class="exp-nav">
+      <button class="nav-arrow" onclick="goTo(0)">← Back</button>
+      <button class="nav-arrow" onclick="goTo(2)">Contact →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3: CONTACT -->
+<div class="page" id="page-contact" data-screen-label="03 Contact">
+  <div class="contact-inner">
+    <div class="page-label">Contact</div>
+    <h2 class="page-heading">Let's Build<br><em>Something</em></h2>
+    <p class="contact-sub">Open to opportunities, collabs, or just a good chat.<br>Find me here 👇</p>
+    <div class="contact-links">
+      <a href="https://github.com/Icecoldblack" target="_blank" class="c-link">
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </span>
+      </a>
+      <a href="https://www.linkedin.com/in/uyiosa-nehikhuere-16406328b/" target="_blank" class="c-link">
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </span>
+      </a>
+    </div>
+    <button class="contact-back" onclick="goTo(1)">← Back to projects</button>
+  </div>
+</div>
+
+<!-- JavaScript modules — order matters -->
+<script src="js/cursor.js"></script>
+<script src="js/background.js"></script>
+<script src="js/pages.js"></script>
+<script src="js/terminal.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/welcome.js"></script>
+
+</body>
+</html>
