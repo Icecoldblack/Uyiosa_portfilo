@@ -332,3 +332,12 @@ kbd {
   .proj-grid { grid-template-columns: 1fr; }
   #nav-dots { right: 16px; }
 }
+
+/* Touch devices: hide the custom cursor, restore default pointer */
+@media (hover: none) and (pointer: coarse) {
+  #cur, #cur-r { display: none; }
+  body { cursor: auto; }
+  button, a, .dot-btn, .line1, .line2 { cursor: pointer; }
+  .enter-btn, .nav-arrow, .contact-back, .c-link, .proj-link { cursor: pointer; }
+  .scroll-hint::after { content: ' ↑ swipe'; }
+}

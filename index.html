@@ -63,12 +63,19 @@
         </span>
       </button>
       <div class="egg-hints" id="egg-hints">
-        <span class="egg-hint">press <kbd>`</kbd> for something fun</span>
+        <span class="egg-hint" id="hint-terminal">press <kbd>`</kbd> for something fun</span>
         <span class="egg-hint-sep">·</span>
-        <span class="egg-hint">↑↑↓↓←→←→BA</span>
+        <span class="egg-hint" id="hint-konami">↑↑↓↓←→←→BA</span>
         <span class="egg-hint-sep">·</span>
         <span class="egg-hint">click the name...</span>
       </div>
+      <script>
+        // Swap hints for touch users right away (before fonts paint)
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+          document.getElementById('hint-terminal').innerHTML = 'hold <kbd>UYIOSA</kbd> to open terminal';
+          document.getElementById('hint-konami').textContent = '↑↑↓↓←→←→ swipe';
+        }
+      </script>
     </div>
   </div>
   <div class="scroll-hint" id="scroll-hint">scroll or click to explore</div>

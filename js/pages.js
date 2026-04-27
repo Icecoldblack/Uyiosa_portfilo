@@ -38,7 +38,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowUp' || e.key === 'PageUp') goTo(current - 1);
 });
 
-// Scroll
+// Scroll (mouse wheel)
 let wheelLock = false;
 document.addEventListener('wheel', e => {
   if (wheelLock) return;
@@ -46,4 +46,32 @@ document.addEventListener('wheel', e => {
   setTimeout(() => wheelLock = false, 800);
   if (e.deltaY > 0) goTo(current + 1);
   else goTo(current - 1);
+}, { passive: true });
+
+// Touch swipe (mobile page navigation)
+let _tsx = null, _tsy = null, _touchLock = false;
+document.addEventListener('touchstart', e => {
+  _tsx = e.touches[0].clientX;
+  _tsy = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchend', e => {
+  if (_tsx === null || _touchLock) return;
+  // If konami swipe-sequence is in progress, don't also navigate pages
+  if (window.konamiInProgress) return;
+  // If terminal or matrix is open, don't navigate
+  if (document.getElementById('term-ov').classList.contains('show')) return;
+  if (document.getElementById('mat-ov').classList.contains('show')) return;
+
+  const dx = e.changedTouches[0].clientX - _tsx;
+  const dy = e.changedTouches[0].clientY - _tsy;
+  _tsx = null; _tsy = null;
+
+  // Must be primarily vertical and at least 50px to count as page-flip
+  if (Math.abs(dy) < 50 || Math.abs(dx) > Math.abs(dy)) return;
+
+  _touchLock = true;
+  setTimeout(() => _touchLock = false, 900);
+  if (dy < 0) goTo(current + 1);  // swipe up → next page
+  else goTo(current - 1);          // swipe down → prev page
 }, { passive: true });

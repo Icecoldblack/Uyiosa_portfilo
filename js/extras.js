@@ -8,11 +8,15 @@ function toast(msg, dur = 3500) {
 
 // ===================== KONAMI =====================
 const K = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+// Mobile swipe sequence mirrors keyboard (no 'b','a' — 8 swipes only)
+const KS = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right'];
 let ki = 0;
+let ksi = 0; // swipe index
 let matrixActive = false;       // prevents double-trigger
 let matrixInterval = null;      // tracked so it's always clearable
 window.konamiInProgress = false; // read by pages.js to block arrow nav
 
+// ── Keyboard Konami ──
 document.addEventListener('keydown', e => {
   // Don't track sequence if the terminal is open or matrix is already showing
   if (document.getElementById('term-ov').classList.contains('show')) return;
@@ -32,6 +36,44 @@ document.addEventListener('keydown', e => {
     window.konamiInProgress = false;
   }
 });
+
+// ── Swipe Konami (mobile) ──
+let _sx = null, _sy = null;
+document.addEventListener('touchstart', e => {
+  _sx = e.touches[0].clientX;
+  _sy = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchend', e => {
+  if (_sx === null || matrixActive) return;
+  if (document.getElementById('term-ov').classList.contains('show')) return;
+  const dx = e.changedTouches[0].clientX - _sx;
+  const dy = e.changedTouches[0].clientY - _sy;
+  _sx = null; _sy = null;
+
+  // Need at least 40px of movement to count as a swipe
+  if (Math.max(Math.abs(dx), Math.abs(dy)) < 40) return;
+
+  let dir;
+  if (Math.abs(dy) > Math.abs(dx)) {
+    dir = dy < 0 ? 'up' : 'down';
+  } else {
+    dir = dx < 0 ? 'left' : 'right';
+  }
+
+  if (dir === KS[ksi]) {
+    ksi++;
+    window.konamiInProgress = ksi > 0; // block page-swipe nav mid-sequence
+    if (ksi === KS.length) {
+      ksi = 0;
+      window.konamiInProgress = false;
+      triggerMatrix();
+    }
+  } else {
+    ksi = 0;
+    window.konamiInProgress = false;
+  }
+}, { passive: true });
 
 function triggerMatrix() {
   if (matrixActive) return; // hard guard against rapid double-call
@@ -81,15 +123,43 @@ function closeMatrix() {
   ov.onclick = null;
 }
 
-// ===================== CLICK NAME EASTER EGG =====================
+// ===================== CLICK / TAP NAME EASTER EGG =====================
 let nc = 0;
-document.querySelector('.line1').addEventListener('click', () => {
+function onNameActivate() {
   nc++;
   if (nc === 7) {
     nc = 0;
     document.body.style.transition = 'filter .5s';
     document.body.style.filter = 'hue-rotate(180deg)';
     setTimeout(() => document.body.style.filter = '', 2000);
-    toast('okay okay stop touching me! Well everyone but Tiernan :)');
+    toast('okay okay stop touching me!');
   }
+}
+document.querySelector('.line1').addEventListener('click', onNameActivate);
+// Touch devices: touchend fires 'click' on mobile anyway, but be explicit
+document.querySelector('.line1').addEventListener('touchend', e => {
+  // Prevent the ghost click that would double-count
+  e.preventDefault();
+  onNameActivate();
+}, { passive: false });
+
+// ===================== LONG-PRESS → TERMINAL (mobile) =====================
+let _lpTimer = null;
+const _lpTarget = document.querySelector('.line1');
+_lpTarget.addEventListener('touchstart', e => {
+  _lpTimer = setTimeout(() => {
+    _lpTimer = null;
+    const termOv = document.getElementById('term-ov');
+    termOv.classList.toggle('show');
+    if (termOv.classList.contains('show')) {
+      document.getElementById('t-inp').focus();
+      toast(' long-press unlocked — terminal open');
+    }
+  }, 1000); // 1-second hold
+}, { passive: true });
+_lpTarget.addEventListener('touchend', () => {
+  if (_lpTimer) { clearTimeout(_lpTimer); _lpTimer = null; }
+});
+_lpTarget.addEventListener('touchmove', () => {
+  if (_lpTimer) { clearTimeout(_lpTimer); _lpTimer = null; }
 });
