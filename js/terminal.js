@@ -18,7 +18,7 @@ const CMDS = {
   help: () => `Commands:\n  <span style="color:var(--cyan)">about</span>     who is this guy\n  <span style="color:var(--cyan)">projects</span>  list projects\n  <span style="color:var(--cyan)">hire</span>      reasons to hire\n  <span style="color:var(--cyan)">joke</span>      programmer humor\n  <span style="color:var(--cyan)">sudo</span>      try it 😈\n  <span style="color:var(--cyan)">clear</span>     clear terminal\n  <span style="color:var(--cyan)">exit</span>      close`,
   about: () => `Uyiosa Nehikhuere\nSoftware Engineering Student\n"Just something I made on the fly. Enjoy :)"`,
   projects: () => `1. EasePath    → github.com/Icecoldblack/EasePath\n2. PantherWatch → github.com/OfficialEseosa/panther-watch\n3. Medapath    → github.com/Icecoldblack/Medapath`,
-  hire: () => `<span class="ok">COMPILING REASONS...</span>\n✓Bro look what i made \n✓ Im begging please :( \n✓ Built this secret terminal in my portfolio :) \n<span class="ok">VERDICT: HIRE HIM IMMEDIATELY</span>`,
+  hire: () => `<span class="ok">COMPILING REASONS...</span>\n✓ Bro look what i made \n✓ Im begging please :( \n✓ Built this secret terminal in my portfolio :) \n<span class="ok">VERDICT: HIRE HIM IMMEDIATELY</span>`,
   joke: () => `Why do programmers prefer dark mode?\nBecause light attracts bugs. 🦟`,
   sudo: () => `<span class="err">Permission denied: Why you trying to get into my website? </span>\n<span class="err">This incident will be reported.</span>\n<span style="opacity:.4;font-size:.9em">(it won't)</span>`,
   exit: () => { closeTerm(); return null; },
