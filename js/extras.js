@@ -90,6 +90,6 @@ document.querySelector('.line1').addEventListener('click', () => {
     document.body.style.transition = 'filter .5s';
     document.body.style.filter = 'hue-rotate(180deg)';
     setTimeout(() => document.body.style.filter = '', 2000);
-    toast('okay okay stop touching me!');
+    toast('okay okay stop touching me! Well everyone but Tiernan :)');
   }
 });
