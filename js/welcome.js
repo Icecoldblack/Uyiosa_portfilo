@@ -4,6 +4,7 @@
   const hero = document.getElementById('hero-name');
   const btn = document.getElementById('enter-btn');
   const hint = document.getElementById('scroll-hint');
+  const eggHints = document.getElementById('egg-hints');
   const navDots = document.getElementById('nav-dots');
   const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*<>/\\|';
   const final = 'WELCOME, FRIEND.';
@@ -42,6 +43,7 @@
           setTimeout(() => {
             btn.classList.add('show');
             hint.classList.add('show');
+            eggHints.classList.add('show');
             navDots.classList.add('visible');
           }, 600);
         }, 700);
