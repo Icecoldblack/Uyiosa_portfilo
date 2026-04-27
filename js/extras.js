@@ -66,7 +66,7 @@ function triggerMatrix() {
 
   // Use a named function so onclick isn't re-assigned on every trigger
   ov.onclick = closeMatrix;
-  toast('🎮 Konami activated — click to close');
+  toast(' Konami activated — click to close');
 }
 
 function closeMatrix() {
@@ -90,6 +90,6 @@ document.querySelector('.line1').addEventListener('click', () => {
     document.body.style.transition = 'filter .5s';
     document.body.style.filter = 'hue-rotate(180deg)';
     setTimeout(() => document.body.style.filter = '', 2000);
-    toast('🌈 okay okay you found me');
+    toast('okay okay stop touching me!');
   }
 });
