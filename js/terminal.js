@@ -19,7 +19,7 @@ const CMDS = {
   about: () => `Uyiosa Nehikhuere\nSoftware Engineering Student\n"Just something I made on the fly. Enjoy :)"`,
   projects: () => `1. EasePath    → github.com/Icecoldblack/EasePath\n2. PantherWatch → github.com/OfficialEseosa/panther-watch\n3. Medapath    → github.com/Icecoldblack/Medapath`,
   hire: () => `<span class="ok">COMPILING REASONS...</span>\n✓ Bro look what i made \n✓ Im begging please :( \n✓ Built this secret terminal in my portfolio :) \n<span class="ok">VERDICT: HIRE HIM IMMEDIATELY</span>`,
-  joke: () => `Why do programmers prefer dark mode?\nBecause light attracts bugs. 🦟`,
+  joke: () => `Ya know why they call it... Cursor? Because it curses all the code it sees. (say im funny right right.....)`,
   sudo: () => `<span class="err">Permission denied: Why you trying to get into my website? </span>\n<span class="err">This incident will be reported.</span>\n<span style="opacity:.4;font-size:.9em">(it won't)</span>`,
   exit: () => { closeTerm(); return null; },
   whoami: () => `curious_visitor`,
